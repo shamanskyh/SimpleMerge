@@ -59,10 +59,22 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="Load CSV" keyEquivalent="o" id="qIS-W8-SiK"/>
+                                        <menuItem title="Load CSV" tag="1" keyEquivalent="o" id="qIS-W8-SiK">
+                                            <connections>
+                                                <action selector="loadCSV:" target="Voe-Tx-rLC" id="aTa-WC-44C"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="oeL-Og-keC"/>
-                                        <menuItem title="Merge" keyEquivalent="m" id="aTl-1u-JFS"/>
-                                        <menuItem title="Merge and Send" keyEquivalent="M" id="SHa-1t-CnO"/>
+                                        <menuItem title="Merge" keyEquivalent="m" id="aTl-1u-JFS">
+                                            <connections>
+                                                <action selector="merge:" target="Voe-Tx-rLC" id="S82-Xx-YZ1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Merge and Send" keyEquivalent="M" id="SHa-1t-CnO">
+                                            <connections>
+                                                <action selector="mergeAndSend:" target="Voe-Tx-rLC" id="JL5-mj-QMo"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -60,12 +60,12 @@ class WindowController: NSWindowController {
     
     // merge calls the ViewController's merge method
     @IBAction func merge(sender: NSToolbarItem) {
-        (self.contentViewController as ViewController).merge()
+        (self.contentViewController as ViewController).merge(false)
     }
     
     // mergeAndSend calls the ViewController's mergeAndSend method
     @IBAction func mergeAndSend(sender: NSToolbarItem) {
-        (self.contentViewController as ViewController).mergeAndSend()
+        (self.contentViewController as ViewController).merge(true)
     }
     
 }

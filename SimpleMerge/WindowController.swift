@@ -57,6 +57,7 @@ class WindowController: NSWindowController {
         })
     }
     
+    
     // merge calls the ViewController's merge method
     @IBAction func merge(sender: AnyObject?) {
         (self.contentViewController as ViewController).merge(false)

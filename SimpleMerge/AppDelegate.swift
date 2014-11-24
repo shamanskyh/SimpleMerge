@@ -22,7 +22,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: Menu Items
-    
     @IBAction func loadCSV(sender: NSMenuItem) {
         (NSApplication.sharedApplication().mainWindow?.windowController() as WindowController).addCSV(sender)
     }

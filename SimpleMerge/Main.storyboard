@@ -65,12 +65,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="oeL-Og-keC"/>
-                                        <menuItem title="Merge" keyEquivalent="m" id="aTl-1u-JFS">
+                                        <menuItem title="Merge" tag="-1" keyEquivalent="m" id="aTl-1u-JFS">
                                             <connections>
                                                 <action selector="merge:" target="Voe-Tx-rLC" id="S82-Xx-YZ1"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Merge and Send" keyEquivalent="M" id="SHa-1t-CnO">
+                                        <menuItem title="Merge and Send" tag="-1" keyEquivalent="M" id="SHa-1t-CnO">
                                             <connections>
                                                 <action selector="mergeAndSend:" target="Voe-Tx-rLC" id="JL5-mj-QMo"/>
                                             </connections>

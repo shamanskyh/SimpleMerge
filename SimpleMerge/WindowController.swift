@@ -23,16 +23,18 @@ class WindowController: NSWindowController {
     }
     
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
-        
-        if didLoadCSV {
-            return true
-        } else if theItem.tag == 1 {
+        // disable the merge buttons if CSV hasn't loaded yet
+        if didLoadCSV || theItem.tag == 1 {
             return true
         } else {
             return false
         }
     }
     
+    
+    // MARK: Toolbar Items
+    
+    // addCSV loads Cocoa's open panel and passes the URL of the CSV file to the ViewController
     @IBAction func addCSV(sender: NSToolbarItem) {
         let fileTypes = ["csv"]
         
@@ -56,11 +58,12 @@ class WindowController: NSWindowController {
         })
     }
     
-    
+    // merge calls the ViewController's merge method
     @IBAction func merge(sender: NSToolbarItem) {
         (self.contentViewController as ViewController).merge()
     }
     
+    // mergeAndSend calls the ViewController's mergeAndSend method
     @IBAction func mergeAndSend(sender: NSToolbarItem) {
         (self.contentViewController as ViewController).mergeAndSend()
     }

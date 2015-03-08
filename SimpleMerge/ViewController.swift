@@ -10,8 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    var headerKeys: [String] = []
-    var mergeData: [[String : String]] = []
+    var csvArray: [[String]] = []
     
     @IBOutlet var toNameField: NSTextField!
     @IBOutlet var toEmailField: NSTextField!
@@ -38,55 +37,24 @@ class ViewController: NSViewController {
     func importCSV(paths: [AnyObject]) {
 
         // clear previous
-        headerKeys = []
-        mergeData = []
+        csvArray = []
         
-        // grab the file
-        let fullText: String = String(contentsOfURL: (paths.first! as NSURL), encoding: NSUTF8StringEncoding, error: nil)!
-        
-        var finishedHeaders: Bool = false
-        var currentTerm: String = ""
-        var currentDict: [String : String] = [:]
-        var index: Int = 0
-        
-        // step through the text character by character
-        for c in fullText {
-            if c == "," {   // if comma
-                if finishedHeaders {
-                    currentDict[headerKeys[index++]] = currentTerm
-                    currentTerm = ""
-                } else {
-                    headerKeys.append(currentTerm)
-                    currentTerm = ""
-                }
-            } else if c == "\n" || c == "\r\n" || c == "\r" {   // if newline
-                if finishedHeaders {
-                    currentDict[headerKeys[index++]] = currentTerm
-                    mergeData.append(currentDict)
-                    currentDict = [:]
-                    currentTerm = ""
-                    index = 0
-                } else {
-                    finishedHeaders = true
-                    headerKeys.append(currentTerm)
-                    currentTerm = ""
-                    index = 0
-                }
-            } else {    // mid-word: continue building the current term
-                currentTerm.append(c)
-            }
+        // parse the file using CHCSVParser
+        if let arr = NSArray(contentsOfCSVURL: paths.first as? NSURL) as? [[String]] {
+            csvArray = arr
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "Error Parsing CSV"
+            alert.informativeText = "Be sure that the file is a valid CSV file."
+            alert.runModal()
+            return
         }
-        
-        // grab the last term (without trailing newline)
-        // and add the message to the mergeData
-        currentDict[headerKeys[index]] = currentTerm
-        mergeData.append(currentDict)
     }
     
     func merge(send: Bool) {
         
         // die if there's no data
-        if mergeData.count == 0 {
+        if csvArray.count == 0 {
             let alert = NSAlert()
             alert.messageText = "CSV Not Found"
             alert.informativeText = "Make sure you've loaded valid comma-separated values before attempting to merge."
@@ -94,8 +62,11 @@ class ViewController: NSViewController {
             return
         }
         
+        let headerKeys = csvArray.first!
+        
+        
         // for each row in the CSV
-        for messageDict in mergeData {
+        for row in csvArray[1..<csvArray.count] {
             
             var template: String = messageBodyBox.string!
             var toName: String = toNameField.stringValue
@@ -107,15 +78,15 @@ class ViewController: NSViewController {
             var subject: String = subjectField.stringValue
             
             // look for headers in all the textFields
-            for header in headerKeys {
-                template = template.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                toName = toName.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                toEmail = toEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                ccName = ccName.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                ccEmail = ccEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                bccName = bccName.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                bccEmail = bccEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
-                subject = subject.stringByReplacingOccurrencesOfString("%\(header)%", withString: messageDict[header]!, options: NSStringCompareOptions.LiteralSearch, range: nil)
+            for (index, header) in enumerate(headerKeys) {
+                template = template.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                toName = toName.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                toEmail = toEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                ccName = ccName.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                ccEmail = ccEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                bccName = bccName.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                bccEmail = bccEmail.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
+                subject = subject.stringByReplacingOccurrencesOfString("%\(header)%", withString: row[index], options: NSStringCompareOptions.LiteralSearch, range: nil)
                 
             }
             

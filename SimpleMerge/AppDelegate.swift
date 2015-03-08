@@ -23,15 +23,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Menu Items
     @IBAction func loadCSV(sender: NSMenuItem) {
-        (NSApplication.sharedApplication().mainWindow?.windowController() as WindowController).addCSV(sender)
+        (NSApplication.sharedApplication().mainWindow?.windowController() as! WindowController).addCSV(sender)
     }
     
     @IBAction func merge(sender: NSMenuItem) {
-        (NSApplication.sharedApplication().mainWindow?.windowController() as WindowController).merge(sender)
+        (NSApplication.sharedApplication().mainWindow?.windowController() as! WindowController).merge(sender)
     }
     
     @IBAction func mergeAndSend(sender: NSMenuItem) {
-        (NSApplication.sharedApplication().mainWindow?.windowController() as WindowController).mergeAndSend(sender)
+        (NSApplication.sharedApplication().mainWindow?.windowController() as! WindowController).mergeAndSend(sender)
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {

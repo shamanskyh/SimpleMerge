@@ -23,7 +23,7 @@ class WindowController: NSWindowController {
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
         // disable the merge buttons if CSV hasn't loaded yet
         
-        if (NSApplication.sharedApplication().delegate as AppDelegate).didLoadCSV || theItem.tag == 1 {
+        if (NSApplication.sharedApplication().delegate as! AppDelegate).didLoadCSV || theItem.tag == 1 {
             return true
         } else {
             return false
@@ -49,8 +49,8 @@ class WindowController: NSWindowController {
         
         oPanel.beginSheetModalForWindow(self.window!, completionHandler: { (returnCode: Int) in
             if returnCode == NSOKButton {
-                (self.contentViewController as ViewController).importCSV(oPanel.URLs)
-                (NSApplication.sharedApplication().delegate as AppDelegate).didLoadCSV = true
+                (self.contentViewController as! ViewController).importCSV(oPanel.URLs)
+                (NSApplication.sharedApplication().delegate as! AppDelegate).didLoadCSV = true
                 self.validateToolbarItem(self.mergeButton)
                 self.validateToolbarItem(self.mergeSendButton)
             }
@@ -60,12 +60,12 @@ class WindowController: NSWindowController {
     
     // merge calls the ViewController's merge method
     @IBAction func merge(sender: AnyObject?) {
-        (self.contentViewController as ViewController).merge(false)
+        (self.contentViewController as! ViewController).merge(false)
     }
     
     // mergeAndSend calls the ViewController's mergeAndSend method
     @IBAction func mergeAndSend(sender: AnyObject?) {
-        (self.contentViewController as ViewController).merge(true)
+        (self.contentViewController as! ViewController).merge(true)
     }
     
 }

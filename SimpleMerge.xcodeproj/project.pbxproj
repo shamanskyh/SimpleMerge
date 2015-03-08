@@ -13,6 +13,7 @@
 		4A0669951A22D1B000132D0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0669941A22D1B000132D0E /* ViewController.swift */; };
 		4A0669971A22D1B600132D0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A0669961A22D1B600132D0E /* Main.storyboard */; };
 		4A0669991A22D1C600132D0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0669981A22D1C600132D0E /* Images.xcassets */; };
+		4AED285C1AACEA7700106C11 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AED285B1AACEA7700106C11 /* CHCSVParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,9 @@
 		4A0669941A22D1B000132D0E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4A0669961A22D1B600132D0E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A0669981A22D1C600132D0E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4AED28591AACEA7700106C11 /* SimpleMerge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleMerge-Bridging-Header.h"; sourceTree = "<group>"; };
+		4AED285A1AACEA7700106C11 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		4AED285B1AACEA7700106C11 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		4A0669721A22D16900132D0E /* SimpleMerge */ = {
 			isa = PBXGroup;
 			children = (
+				4AED28581AACEA6400106C11 /* CHCSVParser */,
 				4A0669921A22D18D00132D0E /* WindowController.swift */,
 				4A0669751A22D16900132D0E /* AppDelegate.swift */,
 				4A0669941A22D1B000132D0E /* ViewController.swift */,
@@ -110,6 +115,16 @@
 				4A0669871A22D16900132D0E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AED28581AACEA6400106C11 /* CHCSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				4AED285A1AACEA7700106C11 /* CHCSVParser.h */,
+				4AED285B1AACEA7700106C11 /* CHCSVParser.m */,
+				4AED28591AACEA7700106C11 /* SimpleMerge-Bridging-Header.h */,
+			);
+			name = CHCSVParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AED285C1AACEA7700106C11 /* CHCSVParser.m in Sources */,
 				4A0669951A22D1B000132D0E /* ViewController.swift in Sources */,
 				4A0669931A22D18D00132D0E /* WindowController.swift in Sources */,
 				4A0669761A22D16900132D0E /* AppDelegate.swift in Sources */,
@@ -317,10 +333,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SimpleMerge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimpleMerge/SimpleMerge-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -328,10 +347,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SimpleMerge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimpleMerge/SimpleMerge-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -390,6 +411,7 @@
 				4A06698E1A22D16900132D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A06698F1A22D16900132D0E /* Build configuration list for PBXNativeTarget "SimpleMergeTests" */ = {
 			isa = XCConfigurationList;
@@ -398,6 +420,7 @@
 				4A0669911A22D16900132D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,7 +1,7 @@
 SimpleMerge
 ===========
 
-Super simple mail merging for Mac OS X using CSV and Mac's Mail.app. [Download the binary here.](https://sourceforge.net/projects/simplemerge-mail/files/latest/download)
+Super simple mail merging for macOS using CSV and Mac's Mail.app. [Download the binary here.](https://sourceforge.net/projects/simplemerge-mail/files/latest/download)
 
 Start by creating a CSV file with one header row and no header columns. Excel or Numbers are both capable of exporting to CSV.
 
